@@ -25,7 +25,7 @@ ul {
 }
 
 .site-header .navbar-nav .nav-link:active {
-  font-weight: 550;
+  font-weight: 450;
 }
 
 .content-section {
@@ -86,4 +86,8 @@ a.product-name:hover {
 
 #buy-button {
   float: right;
+}
+
+#product-name-detail {
+  color: #438bca;
 }

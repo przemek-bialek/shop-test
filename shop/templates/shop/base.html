@@ -38,26 +38,16 @@
       </nav>
     </header>
 
-    <main role="main" class="container">
-      <div class="row">
-        <div class="col-md-6">
-          {% if messages %}
-            {% for message in messages %}
-              <div class="alert alert-{{ messages.tags }}">
-                {{ messages }}
-              </div>
-            {% endfor %}
-          {% endif %}
-          {% block content %}
-          {% endblock content %}
-        </div>
-        <div class="col-md-6">
-          <!-- TODO: Sidebar -->
-          <div class="content-section">
-            <h3>Sidebar</h3>
+    <main role="main" class="container-fluid">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ messages.tags }}">
+            {{ messages }}
           </div>
-        </div>
-      </div>
+        {% endfor %}
+      {% endif %}
+      {% block content %}
+      {% endblock content %}
     </main>
 
     <!-- Optional JavaScript -->

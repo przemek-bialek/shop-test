@@ -1,0 +1,29 @@
+{% extends 'shop/base.html' %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-8">
+      <article class="media content-section">
+        <a href="#">
+          <img class="rounded product-img" src="{{ product.thumb.url }}">
+        </a>
+        <div class="media-body">
+          <div class="product-metadata">
+            <h1 id="product-name-detail">{{ product.name }}</h1>
+            <small class="text-muted">{{ product.date_posted|date:"d F, Y \a\t G:i" }}</small>
+          </div>
+          <b class="price-font">{{ product.price }}</b>
+        </div>
+      </article>
+    </div>
+    <div class="col-md-4">
+      <article class="media content-section">
+        <a class="mr-2" href="#">
+          <!--TODO user profile pic-->
+          {{ product.seller.username }}
+        </a>
+
+      </article>
+    </div>
+  </div>
+{% endblock content %}

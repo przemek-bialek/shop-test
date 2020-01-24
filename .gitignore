@@ -2,3 +2,4 @@ __pycache__
 product_pics
 profile_pics
 db.sqlite3
+migrations

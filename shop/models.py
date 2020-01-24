@@ -11,8 +11,8 @@ import os
 
 
 class Product(models.Model):
-    title = models.CharField(max_length=60, unique=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=60, unique=True)
+    seller = models.ForeignKey(User, on_delete=models.CASCADE)
     price = MoneyField(decimal_places=2, default=0, default_currency='PLN', max_digits=7)
     img = models.ImageField(default='no_pic.jpg', upload_to='product_pics')
     thumb = models.ImageField(default='no_pic.jpg', upload_to='product_pics/thumbnails')
@@ -20,10 +20,10 @@ class Product(models.Model):
     slug = models.SlugField(null=False, unique=True)
 
     def __str__(self):
-        return self.title
+        return self.name
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        self.slug = slugify(self.name)
 
         if not self.create_thumbnail():
             raise Exception('Given file is not an image')

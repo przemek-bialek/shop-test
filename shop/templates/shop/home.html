@@ -1,18 +1,29 @@
 {% extends 'shop/base.html' %}
 
 {% block content %}
-  {% for product in products %}
-    <article class="media content-section">
-      <img class="rounded product-img" src="{{ product.thumb.url }}">
-      <div class="media-body">
-        <div class="product-metadata">
-          <h2>
-            <a class="product-name" href="#">{{ product.title }}</a>
-          </h2>
-          <b class="price-font">{{ product.price }}</b>
-        </div>
-        <button class="btn btn-outline-info" id="buy-button" href="#">Buy</button>
+  <div class="row">
+    {% for product in products %}
+      <div class="col-md-4">
+        <article class="media content-section">
+          <a href="{% url 'shop-product_detail' product.slug %}">
+            <img class="rounded product-img" src="{{ product.thumb.url }}">
+          </a>
+          <div class="media-body">
+            <div class="product-metadata">
+              <a class="mr-2" href="#">{{ product.seller.username }}</a>
+              <h2>
+                <a class="product-name" href="{% url 'shop-product_detail' product.slug %}">{{ product.name }}</a>
+              </h2>
+              <b class="price-font">{{ product.price }}</b>
+            </div>
+            <button class="btn btn-outline-info" id="buy-button" href="#">Buy</button>
+          </div>
+        </article>
       </div>
-    </article>
-  {% endfor %}
+        {% if forloop.counter|divisibleby:"3" and not forloop.last %}
+  </div>
+  <div class="row">
+        {% endif %}
+    {% endfor %}
+  </div>
 {% endblock content %}
