@@ -1,18 +1,18 @@
 from django.db import models
+from django.conf import settings
 from django.utils import timezone
 from django.utils.text import slugify
-from django.contrib.auth.models import User
 from django.core.files.base import ContentFile
+from djmoney.models.fields import MoneyField
 from PIL import Image
 from io import BytesIO
-from djmoney.models.fields import MoneyField
 
 import os
 
 
 class Product(models.Model):
     name = models.CharField(max_length=60, unique=True)
-    seller = models.ForeignKey(User, on_delete=models.CASCADE)
+    seller = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     price = MoneyField(decimal_places=2, default=0, default_currency='PLN', max_digits=7)
     img = models.ImageField(default='no_pic.jpg', upload_to='product_pics')
     thumb = models.ImageField(default='no_pic.jpg', upload_to='product_pics/thumbnails')

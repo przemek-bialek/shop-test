@@ -5,7 +5,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #444444;
+  color: #5f7889;
 }
 
 ul {
@@ -84,10 +84,10 @@ a.product-name:hover {
   color: #5f7889;
 }
 
-#buy-button {
-  float: right;
+.form-narrow {
+  width: 550px;
 }
 
-#product-name-detail {
-  color: #438bca;
+#buy-button {
+  float: right;
 }

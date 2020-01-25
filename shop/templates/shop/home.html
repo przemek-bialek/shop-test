@@ -3,7 +3,7 @@
 {% block content %}
   <div class="row">
     {% for product in products %}
-      <div class="col-md-4">
+      <div class="col-md-6">
         <article class="media content-section">
           <a href="{% url 'shop-product_detail' product.slug %}">
             <img class="rounded product-img" src="{{ product.thumb.url }}">
