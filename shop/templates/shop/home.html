@@ -11,9 +11,9 @@
           <div class="media-body">
             <div class="product-metadata">
               <a class="mr-2" href="#">{{ product.seller.username }}</a>
-              <h2>
+              <h4>
                 <a class="product-name" href="{% url 'shop-product_detail' product.slug %}">{{ product.name }}</a>
-              </h2>
+              </h4>
               <b class="price-font">{{ product.price }}</b>
             </div>
             <button class="btn btn-outline-info" id="buy-button" href="#">Buy</button>

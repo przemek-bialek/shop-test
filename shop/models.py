@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
 from django.core.files.base import ContentFile
@@ -29,6 +30,10 @@ class Product(models.Model):
             raise Exception('Given file is not an image')
 
         super().save(*args, **kwargs)
+
+
+    def get_absolute_url(self):
+        return reverse('shop-product_detail', kwargs={'slug': self.slug})
 
     def create_thumbnail(self):
         image = Image.open(self.img)
@@ -60,5 +65,7 @@ class Product(models.Model):
         tmp.seek(0)
 
         self.thumb.save(thumb_fname, ContentFile(tmp.read()), save=False)
-
+        print(self.thumb)
+        print(self.thumb.path)
+        print(self.thumb.url)
         return True
