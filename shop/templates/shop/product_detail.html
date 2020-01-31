@@ -9,6 +9,12 @@
         </a>
         <div class="media-body">
           <div class="product-metadata">
+            {% if product.seller == user %}
+              <div>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'shop-product_update' product.slug %}">Update</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'shop-product_delete' product.slug %}">Delete</a>
+              </div>
+            {% endif %}
             <h1>{{ product.name }}</h1>
             <small class="text-muted">{{ product.date_posted|date:"d F, Y \a\t G:i" }}</small>
           </div>

@@ -1,10 +1,9 @@
 from django.urls import reverse
 from django.shortcuts import render, redirect
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView, CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from .models import Product
-from .forms import ProductForm
 
 
 class ProductListView(ListView):
@@ -20,25 +19,39 @@ class ProductDetailView(DetailView):
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
-    #form_class = ProductForm
     fields = ['img', 'name', 'price']
+    template_name = 'shop/product_create.html'
 
     def form_valid(self, form):
         form.instance.seller = self.request.user
         return super().form_valid(form)
 
-    #def get_success_url(self):
-    #    return reverse('shop-product_detail', kwargs={'slug': self.model.slug})
+class ProductUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Product
+    fields = ['img', 'name', 'price']
+    template_name = 'shop/product_update.html'
 
-    #def post(self, request, *args, **kwargs):
-    #    form = self.form_class(request.POST, request.FILES)
-    #    if form.is_valid():
-    #        print('fprma jest se validnieta')
-    #        form.save()
-    #        print("ddddddduuuuuuuuuuupppppppppaaaaaaaaaaa")
-    #        return redirect(self.success_url)
-    #    else:
-    #        return render(request, self.template_name, {'form': form})
+    def form_valid(self, form):
+        form.instance.seller = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        product = self.get_object()
+        if self.request.user == product.seller:
+            return True
+        return False
+
+class ProductDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Product
+    template_name = 'shop/product_delete.html'
+    context_object_name = 'product'
+    success_url = '/'
+
+    def test_func(self):
+        product = self.get_object()
+        if self.request.user == product.seller:
+            return True
+        return False
 
 def about(request):
     return render(request, 'shop/about.html', {'title': 'About'})
