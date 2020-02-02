@@ -11,6 +11,7 @@ class ProductListView(ListView):
     template_name = 'shop/home.html'
     context_object_name = 'products'
     ordering = ['-date_posted']
+    paginate_by = 30;
 
 class ProductDetailView(DetailView):
     model = Product

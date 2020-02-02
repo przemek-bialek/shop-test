@@ -37,6 +37,7 @@ ul {
 }
 
 .product-name {
+  word-break: break-word;
   color: #444444;
 }
 
@@ -88,6 +89,6 @@ a.product-name:hover {
   width: 550px;
 }
 
-#buy-button {
+.buy-button {
   float: right;
 }
