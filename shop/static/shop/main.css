@@ -12,6 +12,45 @@ ul {
   margin: 0;
 }
 
+.home-a {
+  filter: brightness(95%);
+  color: #edf1fa;
+  font-size: 2.5rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.home-a:hover {
+  filter: brightness(105%);
+  color: #3372ff;
+}
+
+.bg-img {
+  position: relative;
+  border-radius: 3px;
+  width: 100%;
+  height: 573px;
+  overflow: hidden;
+}
+
+.bg-img:after {
+  filter: brightness(20%);
+  background: var(--img-url);
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.bg-img:hover:after {
+  filter: brightness(47%);
+}
+
 .bg-steel {
   background: #5f7889;
 }

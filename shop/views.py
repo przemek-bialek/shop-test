@@ -6,9 +6,12 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import Product
 
 
+def home(request):
+    return render(request, 'shop/home.html')
+
 class ProductListView(ListView):
     model = Product
-    template_name = 'shop/home.html'
+    template_name = 'shop/whisky_home.html'
     context_object_name = 'products'
     ordering = ['-date_posted']
     paginate_by = 30;
