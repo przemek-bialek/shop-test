@@ -69,3 +69,21 @@ class Product(models.Model):
         print(self.thumb.path)
         print(self.thumb.url)
         return True
+
+class Whisky(Product):
+    strength = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
+    size = models.PositiveIntegerField(blank=True, null=True)
+    type = models.CharField(max_length=20, blank=True, null=True)
+    distillery = models.CharField(max_length=50, blank=True, null=True)
+    bottler = models.CharField(max_length=50, blank=True, null=True)
+    casktype = models.CharField(max_length=50, blank=True, null=True)
+    casknumber = models.PositiveIntegerField(blank=True, null=True)
+    vintage = models.PositiveSmallIntegerField(blank=True, null=True)
+    serie = models.CharField(max_length=50, blank=True, null=True)
+    bottled = models.DateField(blank=True, null=True)
+    age = models.PositiveSmallIntegerField(blank=True, null=True)
+    bottles_in_serie = models.PositiveIntegerField(blank=True, null=True)
+
+    def get_fields(self):
+        return [(field.name.capitalize, field.value_to_string(self))
+                for field in Whisky._meta.get_fields(include_parents=False) if field.name != 'product_ptr']

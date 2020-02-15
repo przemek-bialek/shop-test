@@ -89,10 +89,23 @@ a.product-name:hover {
   white-space: pre-line;
 }
 
-.product-img {
+.product-thumb {
   height: 125px;
   width: 125px;
   margin-right: 15px;
+}
+
+.product-img-container {
+  width: 500px;
+  height: 500px;
+  line-height: 500px;
+  text-align: center;
+}
+
+.product-img {
+  max-height: 500px;
+  max-width: 500px;
+  vertical-align: middle;
 }
 
 .product-metadata {

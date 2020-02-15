@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'djmoney',
     'django_cleanup',
     'crispy_forms',
+    'star_ratings',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

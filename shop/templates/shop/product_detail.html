@@ -1,37 +1,47 @@
 {% extends 'shop/base.html' %}
-
+{% load ratings %}
 {% block content %}
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-9">
       <article class="media content-section">
-        <a href="#">
-          <img class="rounded product-img" src="{{ product.thumb.url }}">
-        </a>
+        <div class="product-img-container">
+          <a href="#">
+            <img class="rounded product-img" src="{{ product.img.url }}">
+          </a>
+        </div>
         <div class="media-body">
           <div class="product-metadata">
             {% if product.seller == user %}
-              <div>
-                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'shop-product_update' product.slug %}">Update</a>
-                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'shop-product_delete' product.slug %}">Delete</a>
-              </div>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'shop-product_update' product.slug %}">
+                  Update
+                </a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'shop-product_delete' product.slug %}">
+                  Delete
+                </a>
             {% endif %}
             <h1>{{ product.name }}</h1>
             <small class="text-muted">{{ product.date_posted|date:"d F, Y \a\t G:i" }}</small>
           </div>
           <b class="price-font">{{ product.price }}</b>
-          <button class="btn btn-outline-info buy-button" href="#">Buy</button>
+          <a class="btn btn-outline-info buy-button" href="#">Buy</a>
         </div>
       </article>
+      <div class="content-section">
+        {% for property, value in product.get_fields %}
+          {% if value and value != 'None' %}
+            <h5><b>{{ property }}</b> - {{ value }}</h5>
+          {% endif %}
+        {% endfor %}
+      </div>
     </div>
-    <div class="col-md-4">
-      <article class="media content-section">
+    <div class="col-md-3">
+      <div class="media content-section" style="display: block;">
         <a class="mr-2" href="#">
-          <!--TODO user profile pic-->
           <img class="rounded-circle account-img" src="{{ product.seller.img.url }}">
           {{ product.seller.username }}
         </a>
-
-      </article>
+          {% ratings product.seller icon_height=24 icon_width=24 read_only=True %}
+      </div>
     </div>
   </div>
 {% endblock content %}
