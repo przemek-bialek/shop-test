@@ -1,26 +1,42 @@
 {% extends 'shop/base.html' %}
-{% load crispy_forms_tags %}
+{% load ratings %}
 {% block content %}
-  <div class="content-section">
-    <div class="media">
-      <img class="rounded-circle account-img" src="{{ user.img.url }}">
-      <div class="media-body">
-        <h2 class="account-heading">{{ user.username }}</h2>
-        <p class="text-secondary">{{ user.email }}</p>
-      </div>
+  <nav class="navbar navbar-expand-md navbar-dark bg-steel">
+    <img class="rounded-circle account-img" src="{{ User.img.url }}">
+    <div class="navbar-nav" style="display: block;">
+      <a href="{% url 'user-profile' User.username %}">
+        <h1 class="nav-item nav-link">{{ User.username }}</h1>
+      </a>
+      <p style="color: #cbd0bf;">Member since {{ user.date_joined|date:"d F, Y \a\t G:i" }}</p>
+      {% ratings User icon_height=24 icon_width=24 read_only=True %}
     </div>
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      <fieldset class="form-group form-narrow">
-        <legend class="border-bottom mb-4">
-          <h2>Profile informations</h2>
-        </legend>
-        {{ form|crispy }}
-      </fieldset>
-      <div class="form-group">
-        <button class="btn btn-outline-info" type="submit">Update</button>
-      </div>
-    </form>
-  </div>
-  <script>document.querySelector(".custom-file-label").className+=" mt-5"</script>
+  </nav>
+  {% block userinfo %}
+    <nav class="navbar navbar-expand-md navbar-dark bg-steel" style="margin-top: 2px;">
+      <a class="nav-item nav-link btn btn-light profile-nav-btn disabled">Products</a>
+      <a class="nav-item nav-link btn btn-light profile-nav-btn" href="{% url 'user-profile_tabs' User.username 'ratings' %}">Ratings</a>
+    </nav>
+    <div class="row">
+      {% for product in products %}
+        <div class="col-md-4">
+          <article class="media content-section">
+            <a href="{% url 'shop-product_detail' product.slug %}">
+              <img class="rounded product-thumb" src="{{ product.thumb.url }}">
+            </a>
+            <div class="media-body">
+              <div class="product-metadata">
+                <h5>
+                  <a class="product-name" href="{% url 'shop-product_detail' product.slug %}">{{ product.name }}</a>                  </h5>
+                  <b class="price-font">{{ product.price }}</b>
+              </div>
+              <a class="btn btn-outline-info buy-button" href="#">Buy</a>
+            </div>
+          </article>
+        </div>
+        {% if forloop.counter|divisibleby:"3" and not forloop.last %}
+    </div>
+    <div class="row">
+        {% endif %}
+      {% endfor %}
+  {% endblock userinfo %}
 {% endblock content %}

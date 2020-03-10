@@ -132,6 +132,8 @@ AUTH_USER_MODEL = "user.User"
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+
+
 LOGIN_REDIRECT_URL = 'shop-home'
 LOGIN_URL = 'user-login'
 

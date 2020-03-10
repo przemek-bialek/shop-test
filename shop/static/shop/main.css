@@ -56,7 +56,7 @@ ul {
 }
 
 .site-header .navbar-nav .nav-link {
-  color: #cbd4bd;
+  color: #cbd0bf;
 }
 
 .site-header .navbar-nav .nav-link:hover {
@@ -143,4 +143,16 @@ a.product-name:hover {
 
 .buy-button {
   float: right;
+}
+
+.profile-nav-btn {
+  border: 1px solid #5f7889;
+  position: relative;
+  background-color: #698191;
+  color: #cbd0bf;
+}
+
+.profile-img-thumb {
+  height: 12px;
+  width: 12px;
 }

@@ -1,0 +1,12 @@
+{% extends 'star_ratings/widget_base.html' %}
+{% load i18n %}
+
+{% block rating_count %}
+  <div class="star-ratings-rating-count" style="color: #cbd0bf;">
+    {% trans 'Rating Count: ' %} <span class='star-ratings-rating-value'>{{ rating.count }}</span>
+  </div>
+{% endblock rating_count  %}
+{% block rating_average %}
+{% endblock rating_average %}
+{% block rating_user %}
+{% endblock rating_user %}

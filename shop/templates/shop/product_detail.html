@@ -23,7 +23,7 @@
             <small class="text-muted">{{ product.date_posted|date:"d F, Y \a\t G:i" }}</small>
           </div>
           <b class="price-font">{{ product.price }}</b>
-          <a class="btn btn-outline-info buy-button" href="#">Buy</a>
+          <a class="btn btn-outline-info buy-button" href="{% url 'user-rate' product.seller.username %}">Buy</a>
         </div>
       </article>
       <div class="content-section">
@@ -36,7 +36,11 @@
     </div>
     <div class="col-md-3">
       <div class="media content-section" style="display: block;">
-        <a class="mr-2" href="#">
+        {% if product.seller == user %}
+          <a class="mr-2" href="{% url 'user-my_profile' %}">
+        {% else %}
+          <a class="mr-2" href="{% url 'user-profile' product.seller.username %}">
+        {% endif %}
           <img class="rounded-circle account-img" src="{{ product.seller.img.url }}">
           {{ product.seller.username }}
         </a>

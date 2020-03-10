@@ -1,0 +1,20 @@
+{% extends 'shop/base.html' %}
+{% load crispy_forms_tags %}
+{% load ratings %}
+{% block content %}
+  <div class="content-section">
+    <form method="POST">
+      {% csrf_token %}
+      <fieldset class="form-group form-narrow">
+        <legend class="border-bottom-mb-4">
+          <h2>Submit a rating</h2>
+        </legend>
+        
+        {{ form|crispy }}
+      </fieldset>
+      <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Submit</button>
+      </div>
+    </form>
+  </div>
+{% endblock content %}
