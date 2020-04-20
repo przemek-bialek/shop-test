@@ -1,11 +1,11 @@
 {% extends 'shop/base.html' %}
-
+{% load class_name_str %}
 {% block content %}
   <div class="row">
     {% for product in products %}
       <div class="col-md-4">
         <article class="media content-section">
-          <a href="{% url 'shop-product_detail' product.slug %}">
+          <a href="{% url 'shop-product_detail' product|class_name_str product.slug %}">
             <img class="rounded product-thumb" src="{{ product.thumb.url }}">
           </a>
           <div class="media-body">
@@ -16,7 +16,7 @@
                 <a class="mr-2" href="{% url 'user-profile' product.seller.username %}">{{ product.seller.username }}</a>
               {% endif %}
               <h5>
-                <a class="product-name" href="{% url 'shop-product_detail' product.slug %}">{{ product.name }}</a>
+                <a class="product-name" href="{% url 'shop-product_detail' product|class_name_str product.slug %}">{{ product.name }}</a>
               </h5>
               <b class="price-font">{{ product.price }}</b>
             </div>

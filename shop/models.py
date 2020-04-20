@@ -3,6 +3,7 @@ from django.conf import settings
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
+from django.utils.encoding import force_text
 from django.core.files.base import ContentFile
 from djmoney.models.fields import MoneyField
 from PIL import Image
@@ -65,15 +66,12 @@ class Product(models.Model):
         tmp.seek(0)
 
         self.thumb.save(thumb_fname, ContentFile(tmp.read()), save=False)
-        print(self.thumb)
-        print(self.thumb.path)
-        print(self.thumb.url)
         return True
 
 class Whisky(Product):
+    type = models.CharField(max_length=20, blank=True, null=True)
     strength = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
     size = models.PositiveIntegerField(blank=True, null=True)
-    type = models.CharField(max_length=20, blank=True, null=True)
     distillery = models.CharField(max_length=50, blank=True, null=True)
     bottler = models.CharField(max_length=50, blank=True, null=True)
     casktype = models.CharField(max_length=50, blank=True, null=True)
@@ -85,5 +83,20 @@ class Whisky(Product):
     bottles_in_serie = models.PositiveIntegerField(blank=True, null=True)
 
     def get_fields(self):
-        return [(field.name.capitalize, field.value_to_string(self))
+        return [(field.name.replace('_', ' ').capitalize, field.value_to_string(self))
                 for field in Whisky._meta.get_fields(include_parents=False) if field.name != 'product_ptr']
+
+class Metal(Product):
+    type = models.CharField(max_length=20, blank=True, null=True)
+    alloy = models.CharField(max_length=15, blank=True, null=True)
+    weight = models.PositiveIntegerField(blank=True, null=True)
+    diameter = models.PositiveIntegerField(blank=True, null=True)
+    denomination = MoneyField(decimal_places=2, default=0, default_currency='PLN', max_digits=8)
+    mintage_pcs = models.PositiveIntegerField(blank=True, null=True)
+    edge = models.CharField(max_length=20, blank=True, null=True)
+    quality = models.CharField(max_length=30, blank=True, null=True)
+    producer = models.CharField(max_length=35, blank=True, null=True)
+
+    def get_fields(self):
+        return [(field.name.replace('_', ' ').capitalize, field.value_to_string(self))
+                for field in Metal._meta.get_fields(include_parents=False) if field.name != 'product_ptr']

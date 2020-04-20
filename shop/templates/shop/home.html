@@ -4,14 +4,14 @@
   <div class="row">
     <div class="col-md-6">
       <div class="bg-img" style="--img-url: url(/media/background_whisky.jpg)">
-        <a class="home-a" href="{% url 'shop-whisky_home' %}">
+        <a class="home-a" href="{% url 'shop-product_home' 'Whisky' %}">
           Whisky Market
         </a>
       </div>
     </div>
     <div class="col-md-6">
       <div class="bg-img" style="--img-url: url(/media/background_metal.jpg)">
-        <a class="home-a" href="#">
+        <a class="home-a" href="{% url 'shop-product_home' 'Metal' %}">
           Metal Market
         </a>
       </div>

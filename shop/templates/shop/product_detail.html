@@ -1,5 +1,7 @@
 {% extends 'shop/base.html' %}
 {% load ratings %}
+{% load class_name_str %}
+
 {% block content %}
   <div class="row">
     <div class="col-md-9">
@@ -12,10 +14,10 @@
         <div class="media-body">
           <div class="product-metadata">
             {% if product.seller == user %}
-                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'shop-product_update' product.slug %}">
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'shop-product_update' product|class_name_str product.slug %}">
                   Update
                 </a>
-                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'shop-product_delete' product.slug %}">
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'shop-product_delete' product|class_name_str product.slug %}">
                   Delete
                 </a>
             {% endif %}

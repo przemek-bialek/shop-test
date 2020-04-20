@@ -1,5 +1,5 @@
 {% extends 'shop/base.html' %}
-
+{% load class_name_str %}
 {% block content %}
   <div class="content-section">
     <form method="POST">
@@ -12,7 +12,7 @@
       </fieldset>
       <div class="form-group">
         <button class="btn btn-outline-danger" type="submit">Delete</button>
-        <a class="btn btn-outline-secondary" href="{% url 'shop-product_detail' product.slug %}">Cancel</a>
+        <a class="btn btn-outline-secondary" href="{% url 'shop-product_detail' product|class_name_str product.slug %}">Cancel</a>
       </div>
     </form>
   </div>

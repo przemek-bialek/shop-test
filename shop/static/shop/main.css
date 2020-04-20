@@ -156,3 +156,15 @@ a.product-name:hover {
   height: 12px;
   width: 12px;
 }
+
+.sell-dropdown-item {
+  color: #cbd0bf;
+}
+
+.sell-dropdown-item:hover {
+  color: #3e464d;
+}
+
+.sell-dropdown-item:active {
+  font-weight: 450;
+}
