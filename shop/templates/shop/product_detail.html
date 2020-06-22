@@ -1,10 +1,9 @@
 {% extends 'shop/base.html' %}
 {% load ratings %}
-{% load class_name_str %}
 
 {% block content %}
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-9">
       <article class="media content-section">
         <div class="product-img-container">
           <a href="#">
@@ -12,20 +11,22 @@
           </a>
         </div>
         <div class="media-body">
-          <div class="product-metadata">
+          <div class="product-metadata" style="position: relative;">
             {% if product.seller == user %}
-                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'shop-product_update' product|class_name_str product.slug %}">
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'shop-product_update' product.product_type product.slug %}">
                   Update
                 </a>
-                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'shop-product_delete' product|class_name_str product.slug %}">
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'shop-product_delete' product.product_type product.slug %}">
                   Delete
                 </a>
             {% endif %}
             <h1>{{ product.name }}</h1>
             <small class="text-muted">{{ product.date_posted|date:"d F, Y \a\t G:i" }}</small>
+            <b class="price-font">{{ product.price }}{{ product.price_currency }}</b>
           </div>
-          <b class="price-font">{{ product.price }}</b>
-          <a class="btn btn-outline-info buy-button" href="{% url 'user-rate' product.seller.username %}">Buy</a>
+          {% if product.seller != user %}
+            <a class="btn btn-outline-info buy-button" href="{% url 'add_to_cart-view' product.slug %}">Buy</a>
+          {% endif %}
         </div>
       </article>
       <div class="content-section">
@@ -36,7 +37,7 @@
         {% endfor %}
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-3">
       <div class="media content-section" style="display: block;">
         {% if product.seller == user %}
           <a class="mr-2" href="{% url 'user-my_profile' %}">

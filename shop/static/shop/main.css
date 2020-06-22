@@ -109,6 +109,7 @@ a.product-name:hover {
 }
 
 .product-metadata {
+  height: 122px;
   padding-bottom: 1px;
   margin-bottom: 5px;
   border-bottom: 1px solid #e3e3e3;
@@ -132,6 +133,9 @@ a.product-name:hover {
 }
 
 .price-font {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
   font-size: 1.5rem;
   font-weight: 550;
   color: #5f7889;
@@ -143,6 +147,13 @@ a.product-name:hover {
 
 .buy-button {
   float: right;
+}
+
+.remove-button {
+  position: absolute;
+  float: right;
+  bottom: 20px;
+  right: 20px;
 }
 
 .profile-nav-btn {
@@ -167,4 +178,28 @@ a.product-name:hover {
 
 .sell-dropdown-item:active {
   font-weight: 450;
+}
+
+.sell-dropdown-item span {
+  color: #5f7889;
+  background: #cbd0bf;
+  font-size: 0.7rem;
+}
+
+.sell-dropdown-item:hover span {
+  color: #cbd0bf;
+  background: #5f7889;
+}
+
+.sell-dropdown-item span:hover {
+  color: #cbd0bf;
+  background: #5f7889;
+}
+
+.table-borderless td, .table-borderless th {
+  border: none;
+}
+
+.checkout-btn {
+  width: 100%;
 }

@@ -9,7 +9,7 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
 
     def __str__(self):
-        return f'{self.username}\'s profile'
+        return f'{self.username}'
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

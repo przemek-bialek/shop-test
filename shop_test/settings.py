@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'user.apps.UserConfig',
+    'cart.apps.CartConfig',
     'djmoney',
     'django_cleanup',
     'crispy_forms',

@@ -11,7 +11,6 @@ def home(request):
     return render(request, 'shop/home.html')
 
 class ProductListView(ListView):
-    model = Whisky
     template_name = 'shop/product_list.html'
     context_object_name = 'products'
     ordering = ['-date_posted']
@@ -50,6 +49,7 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.seller = self.request.user
+        form.instance.product_type = self.kwargs['product_type']
         return super().form_valid(form)
 
 

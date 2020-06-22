@@ -1,26 +1,28 @@
 {% extends 'shop/base.html' %}
-{% load class_name_str %}
+
 {% block content %}
   <div class="row">
     {% for product in products %}
-      <div class="col-md-4">
-        <article class="media content-section">
-          <a href="{% url 'shop-product_detail' product|class_name_str product.slug %}">
+      <div class="col-4">
+        <article class="media content-section" style="height: 182px;">
+          <a href="{% url 'shop-product_detail' product.product_type product.slug %}">
             <img class="rounded product-thumb" src="{{ product.thumb.url }}">
           </a>
           <div class="media-body">
-            <div class="product-metadata">
+            <div class="product-metadata" style="position: relative;">
               {% if product.seller == user %}
                 <a class="mr-2" href="{% url 'user-my_profile' %}">{{ product.seller.username }}</a>
               {% else %}
                 <a class="mr-2" href="{% url 'user-profile' product.seller.username %}">{{ product.seller.username }}</a>
               {% endif %}
               <h5>
-                <a class="product-name" href="{% url 'shop-product_detail' product|class_name_str product.slug %}">{{ product.name }}</a>
+                <a class="product-name" href="{% url 'shop-product_detail' product.product_type product.slug %}">{{ product.name }}</a>
               </h5>
-              <b class="price-font">{{ product.price }}</b>
+              <b class="price-font">{{ product.price }}{{ product.price_currency }}</b>
             </div>
-            <button class="btn btn-outline-info buy-button" href="#">Buy</button>
+            {% if product.seller != user %}
+              <a class="btn btn-outline-info buy-button" href="{% url 'add_to_cart-view' product.slug %}">Buy</a>
+            {% endif %}
           </div>
         </article>
       </div>

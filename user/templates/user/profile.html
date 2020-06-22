@@ -1,6 +1,5 @@
 {% extends 'shop/base.html' %}
 {% load ratings %}
-{% load class_name_str %}
 
 {% block content %}
   <nav class="navbar navbar-expand-md navbar-dark bg-steel">
@@ -14,21 +13,21 @@
     </div>
   </nav>
   {% block userinfo %}
-    <nav class="navbar navbar-expand-md navbar-dark bg-steel" style="margin-top: 2px;">
+    <nav class="navbar navbar-expand navbar-dark bg-steel" style="margin-top: 2px;">
       <a class="nav-item nav-link btn btn-light profile-nav-btn disabled">Products</a>
       <a class="nav-item nav-link btn btn-light profile-nav-btn" href="{% url 'user-profile_tabs' User.username 'ratings' %}">Ratings</a>
     </nav>
     <div class="row">
       {% for product in products %}
-        <div class="col-md-4">
+        <div class="col-4">
           <article class="media content-section">
-            <a href="{% url 'shop-product_detail' product|class_name_str product.slug %}">
+            <a href="{% url 'shop-product_detail' product.product_type product.slug %}">
               <img class="rounded product-thumb" src="{{ product.thumb.url }}">
             </a>
             <div class="media-body">
               <div class="product-metadata">
                 <h5>
-                  <a class="product-name" href="{% url 'shop-product_detail' product|class_name_str product.slug %}">{{ product.name }}</a>                  </h5>
+                  <a class="product-name" href="{% url 'shop-product_detail' product.product_type product.slug %}">{{ product.name }}</a>                  </h5>
                   <b class="price-font">{{ product.price }}</b>
               </div>
               <a class="btn btn-outline-info buy-button" href="#">Buy</a>

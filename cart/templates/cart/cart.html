@@ -1,0 +1,68 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+  {% if items %}
+    <div class="row">
+      <div class="col-8">
+        <article class="media content-section">
+          <table class="table table-hover table-borderless">
+            <tbody>
+              {% for item in items %}
+                <tr>
+                  <td>
+                    <a href="{% url 'shop-product_detail' item.product.product_type item.product.slug %}">
+                      <img class="rounded product-thumb" src="{{ item.product.thumb.url }}">
+                    </a>
+                  </td>
+                  <td style="width:100%">
+                    <a href="{% url 'shop-product_detail' item.product.product_type item.product.slug %}">
+                      <b>{{ item.product.name }}</b>
+                      <br>
+                      {% for property, value in item.product.get_fields %}
+                        {% if value and value != 'None' %}
+                          {{ property }} - {{ value }}
+                          <br>
+                        {% endif %}
+                      {% endfor %}
+                    </a>
+                  </td>
+                  <td style="position:relative;">
+                    {{ item.product.price }}{{ item.product.price_currency }}
+                    <a class="btn btn-outline-info remove-button" href="{% url 'remove_from_cart-view' item.product.slug %}">Remove</a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </article>
+      </div>
+      <div class="col-4">
+        <div class="content-section">
+          <div style="padding-bottom: 10px;">
+            Cart price
+            <b style="float: right;">{{ cart_price }}zł</b>
+          </div>
+            <a class="btn btn-outline-info checkout-btn" href="#">Proceed to checkout</a>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <h2>Your cart is empty</h2>
+  {% endif %}
+  {% if is_paginated %}
+    {% if page_obj.has_previous %}
+      <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Prev</a>
+    {% endif %}
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+        <a class="btn btn-info disabled mb-4" href="?page={{ num }}">{{ num }}</a>
+      {% elif num > page_obj.number|add:"-4" and num < page_obj.number|add:"4" %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+      {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+    {% endif %}
+  {% endif %}
+{% endblock content %}

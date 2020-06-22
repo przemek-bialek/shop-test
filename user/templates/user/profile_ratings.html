@@ -1,13 +1,13 @@
 {% extends 'user/profile.html' %}
 {% load ratings %}
 {% block userinfo %}
-  <nav class="navbar navbar-expand-md navbar-dark bg-steel" style="margin-top: 2px;">
+  <nav class="navbar navbar-expand navbar-dark bg-steel" style="margin-top: 2px;">
     <a class="nav-item nav-link btn btn-light profile-nav-btn" href="{% url 'user-profile' User.username %}">Products</a>
     <a class="nav-item nav-link btn btn-light profile-nav-btn disabled">Ratings</a>
   </nav>
     {% for rating in ratings %}
       <div class="row">
-        <div class="col-md">
+        <div class="col">
           <article class="media content-section">
             <div class="mr-5">
               <a href="{% url 'user-profile' rating.rater.username %}">
