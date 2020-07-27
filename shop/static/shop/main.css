@@ -113,6 +113,7 @@ a.product-name:hover {
   padding-bottom: 1px;
   margin-bottom: 5px;
   border-bottom: 1px solid #e3e3e3;
+  position: relative;
 }
 
 .article-svg {
@@ -134,7 +135,6 @@ a.product-name:hover {
 
 .price-font {
   position: absolute;
-  left: 0px;
   bottom: 0px;
   font-size: 1.5rem;
   font-weight: 550;

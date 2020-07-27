@@ -1,11 +1,13 @@
 from django.contrib import messages
 from django.views.generic import ListView
+from django.views.generic.edit import FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
 from shop.models import Product
 from .models import CartItem, Cart
+from .forms import CheckoutForm
 
 class CartListView(LoginRequiredMixin, ListView):
     template_name = 'cart/cart.html'
@@ -51,3 +53,21 @@ def remove_from_cart(request, product_slug):
     else:
         messages.info(request, 'Item was not in your cart')
     return redirect('cart-view')
+
+class CheckoutView(LoginRequiredMixin, FormView):
+    form_class = CheckoutForm
+    template_name = 'cart/checkout.html'
+    success_url = '/'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cart = Cart.objects.filter(buyer=self.request.user, checked_out=False)[0]
+        items = CartItem.objects.filter(cart=cart)
+        if cart:
+            context['items'] = items
+        return context
+
+    def get_form_kwargs(self):
+        kwargs = super(CheckoutView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs

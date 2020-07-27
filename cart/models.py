@@ -15,8 +15,8 @@ class Cart(models.Model):
 
     def __str__(self):
         if self.checked_out:
-            return f'{self.pk} {self.buyer}\'s cart checked_out'
-        return f'{self.pk} {self.buyer}\'s cart'
+            return f'{self.price}zł {self.buyer}\'s cart checked_out'
+        return f'{self.price}zł {self.buyer}\'s cart'
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
@@ -45,3 +45,15 @@ class CartItem(models.Model):
     #    self.content_type = ContentType.objects.get_for_model(type(item))
     #    self.object_id = item.pk
     #product = property(get_item, set_item)
+
+class ShippingAddress(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    name = models.CharField(max_length=15)
+    lastname = models.CharField(max_length=30)
+    # TODO: country
+    city = models.CharField(max_length=35)
+    street_adress = models.CharField(max_length=85)
+    zip_code = models.CharField(max_length=6)
+
+    def __str__(self):
+        return f'{self.user.username}-{self.name} {self.lastname} {self.city} {self.street_adress}'

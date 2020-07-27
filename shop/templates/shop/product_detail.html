@@ -22,7 +22,7 @@
             {% endif %}
             <h1>{{ product.name }}</h1>
             <small class="text-muted">{{ product.date_posted|date:"d F, Y \a\t G:i" }}</small>
-            <b class="price-font">{{ product.price }}{{ product.price_currency }}</b>
+            <b class="price-font" style="right: 0px;">{{ product.price }}{{ product.price_currency }}</b>
           </div>
           {% if product.seller != user %}
             <a class="btn btn-outline-info buy-button" href="{% url 'add_to_cart-view' product.slug %}">Buy</a>

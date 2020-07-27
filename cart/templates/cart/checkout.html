@@ -1,0 +1,39 @@
+{% extends 'shop/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-8">
+      <div class="content-section">
+        <form method="POST">
+          {% csrf_token %}
+          <fieldset class="form-group form-narrow">
+            <legend>
+              <h2>Checkout</h2>
+            </legend>
+            {{ form|crispy }}
+          </fieldset>
+        </form>
+      </div>
+    </div>
+    <div class="col-4">
+      {% for item in items %}
+        <article class="media content-section">
+          <a href="{% url 'shop-product_detail' item.product.product_type item.product.slug %}">
+            <img class="rounded product-thumb" src="{{ item.product.thumb.url }}">
+          </a>
+          <div class="media-body">
+            <div class="product-metadata">
+              <a class="mr-2" href="{% url 'user-profile' item.product.seller.username %}">{{ item.product.seller.username }}</a>
+              <h5>
+                <a class="product-name" href="{% url 'shop-product_detail' item.product.product_type item.product.slug %}">{{ item.product.name }}</a>
+              </h5>
+              <b class="price-font">{{ item.product.price }}{{ item.product.price_currency }}</b>
+            </div>
+          </div>
+        </article>
+      {% endfor %}
+      <button class="btn btn-outline-info" type="submit">Proceed to summary</button>
+    </div>
+  </div>
+{% endblock content %}

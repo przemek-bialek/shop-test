@@ -41,7 +41,7 @@
             Cart price
             <b style="float: right;">{{ cart_price }}zł</b>
           </div>
-            <a class="btn btn-outline-info checkout-btn" href="#">Proceed to checkout</a>
+            <a class="btn btn-outline-info checkout-btn" href="{% url 'cart-checkout-view' %}">Proceed to checkout</a>
         </div>
       </div>
     </div>
