@@ -6,7 +6,8 @@ django-crispy-forms==1.8.1
 django-model-utils==4.0.0
 django-money==1.0
 django-star-ratings==0.9.1
-Pillow==7.0.0
+Pillow==7.2.0
+pkg-resources==0.0.0
 py-moneyed==0.8.0
 pytz==2019.3
 six==1.14.0
